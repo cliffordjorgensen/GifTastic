@@ -14,46 +14,64 @@
 </head>
 
 <body>
-    <div class="col-md-12 text-center main">
-        <div class="jumbotron">
-            <h1 class="display-4">GIF-tastic</h1>
-            <div>
-                <div id="gifs-appear-here"></div>
-            </div>
+    <div class="container">
+        <div class="row">
             <div class="jumbotron">
-                <button randomGif="random?" type="button" id="newGif" class="btn btn-primary btn-lg btn-block">NEW
-                    RANDOM
-                    GIF</button>
+                <h1 class="display-4">GIF-TASTIC</h1>
+                <div class="col-md-6 text-center main">
+                    <nav class="navbar navbar-light bg-light">
+                        <form class="form-inline">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </nav>
+                    <div class="col-md-6 text-center main">
+                        <div class="jumbotron">
+                            <button randomGif="random?" type="button" id="newGif"
+                                class="btn btn-primary btn-lg btn-block">NEW
+                                RANDOM
+                                GIF</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center main">
+                    <div class="jumbotron">
+                        <div id="gifs-appear-here"></div>
+                    </div>
+                </div>
             </div>
         </div>
-        <script>$("button").on("click", function () {
-
-                var randGif = $(this).attr("randomGif");
-                var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-                    randGif + "&limit=200&api_key=719NG9CJsiQE8fsOqJ1ghZ0YR5gDL5QC";
+    </div>
 
 
-                $.ajax({
-                    url: queryURL,
-                    method: "GET"
-                }).then(function (response) {
-                    const results = response.data;
-                    var randomProperty = function (obj) {
-                        var keys = Object.keys(obj)
-                        return obj[keys[keys.length * Math.random() << 0]];
-                    };
-                    var randomObjitem = randomProperty(results);
-                    var gifDiv = $("<div>");
-                    var rating = randomObjitem.rating;
-                    var p = $("<p>").text("Rating: " + rating);
-                    var gifImage = $("<img>");
-                    gifImage.attr("src", randomObjitem.images.fixed_height.url)
-                    gifDiv.prepend(p);
-                    gifDiv.prepend(gifImage);
-                    $("#gifs-appear-here").prepend(gifDiv);
 
-                });
-            });</script>
+
+    <script>$("button").on("click", function () {
+            var randGif = $(this).attr("randomGif");
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+                randGif + "&limit=1000&api_key=719NG9CJsiQE8fsOqJ1ghZ0YR5gDL5QC";
+
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(function (response) {
+                const results = response.data;
+                var randomProperty = function (obj) {
+                    var keys = Object.keys(obj)
+                    return obj[keys[keys.length * Math.random() << 0]];
+                };
+                var randomObjitem = randomProperty(results);
+                var gifDiv = $("<div>");
+                var rating = randomObjitem.rating;
+                var p = $("<p>").text("Rating: " + rating);
+                var gifImage = $("<img>");
+                gifImage.attr("src", randomObjitem.images.fixed_height.url)
+                gifDiv.prepend(p);
+                gifDiv.prepend(gifImage);
+                $("#gifs-appear-here").prepend(gifDiv);
+
+            });
+        });</script>
 </body>
 
 </html>
