@@ -13,38 +13,41 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
-
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="jumbotron">
-                <h1 class="display-4">GIF-TASTIC</h1>
-                <div class="col-md-6 text-center main">
-                    <nav class="navbar navbar-light bg-light">
-                        <form class="form-inline">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
-                                id="searchButton">Search</button>
-                        </form>
-                    </nav>
-                    <div class="col-md-6 text-center main">
-                        <div class="jumbotron">
-                            <button randomGif="random?" type="button" id="newGif"
-                                class="btn btn-primary btn-lg btn-block">NEW
-                                RANDOM
-                                GIF</button>
+    <div class="parent-container">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="container">
+                            <div class="jumbotron text-center col-md-12">
+                                <h1 class="display-4">GIF-TASTIC</h1>
+                                <nav class="navbar navbar-light bg-light">
+                                    <form class="form-inline">
+                                        <input class="form-control mr-sm-2" type="search" placeholder="Search"
+                                            aria-label="Search">
+                                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
+                                            id="searchButton">Search</button>
+                                    </form>
+                                </nav>
+                                <button randomGif="random?" type="button" id="newGif"
+                                    class="btn btn-primary btn-lg btn-block">NEW
+                                    RANDOM
+                                    GIF</button>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-6 text-center main">
-                    <div class="jumbotron">
-                        <div id="gifs-appear-here"></div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="container">
+            <div class="row">
+                <div class="jumbotron text-center col-md-12">
+                    <div class="row" id="gifs-appear-here"></div>
+                </div>
+            </div>
+        </div>
     </div>
-
     <script>$("button").on("click", function () {
             var randGif = $(this).attr("randomGif");
             var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
@@ -69,16 +72,7 @@
                 gifDiv.prepend(gifImage);
                 $("#gifs-appear-here").prepend(gifDiv);
             });
-        });
-        $("#searchButton").on("click", function (event) {
-            event.preventDefault();
-            console.log("search button has been clicked");
-            searchTerm = $("#searchTerm").val();
-            console.log(searchTerm);
-            topics.push(searchTerm);
-            $("#buttonDrop").append('<button class="topicButtons" data-value= "' + searchTerm + '">' + searchTerm + '</button>');
-            console.log(topics);
-    </script>
+        });</script>
 </body>
 
 </html>

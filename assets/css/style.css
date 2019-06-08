@@ -1,0 +1,23 @@
+.parent-container {
+   display: flex;
+}
+.jumbotron{
+  height:100%;
+  width:100%;
+}
+@media (min-width: 1200px) {
+    .container{
+        max-width: 970px;
+    }
+}
+.row {
+    float: left;
+    position: relative;
+    
+}
+.container {
+    float: left;
+    position: relative;
+    max-width: 50%;
+    background-color: darkorange;
+}
