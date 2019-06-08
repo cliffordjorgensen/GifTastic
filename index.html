@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Gif-tastic</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+        integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="./assets/javascript/gifScript.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="col-md-12 text-center main">
+        <div class="jumbotron">
+            <h1 class="display-4">GIF-tastic</h1>
+            <div>
+                <div id="gifs-appear-here"></div>
+            </div>
+            <div class="jumbotron">
+                <button randomGif="random?" type="button" id="newGif" class="btn btn-primary btn-lg btn-block">NEW
+                    RANDOM
+                    GIF</button>
+            </div>
+        </div>
+        <script>$("button").on("click", function () {
+
+                var randGif = $(this).attr("randomGif");
+                var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+                    randGif + "&limit=200&api_key=719NG9CJsiQE8fsOqJ1ghZ0YR5gDL5QC";
+
+
+                $.ajax({
+                    url: queryURL,
+                    method: "GET"
+                }).then(function (response) {
+                    const results = response.data;
+                    var randomProperty = function (obj) {
+                        var keys = Object.keys(obj)
+                        return obj[keys[keys.length * Math.random() << 0]];
+                    };
+                    var randomObjitem = randomProperty(results);
+                    var gifDiv = $("<div>");
+                    var rating = randomObjitem.rating;
+                    var p = $("<p>").text("Rating: " + rating);
+                    var gifImage = $("<img>");
+                    gifImage.attr("src", randomObjitem.images.fixed_height.url)
+                    gifDiv.prepend(p);
+                    gifDiv.prepend(gifImage);
+                    $("#gifs-appear-here").prepend(gifDiv);
+
+                });
+            });</script>
+</body>
+
+</html>
