@@ -13,6 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
+
 <body>
     <div class="container">
         <div class="row">
@@ -22,7 +23,8 @@
                     <nav class="navbar navbar-light bg-light">
                         <form class="form-inline">
                             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
+                                id="searchButton">Search</button>
                         </form>
                     </nav>
                     <div class="col-md-6 text-center main">
@@ -42,9 +44,6 @@
             </div>
         </div>
     </div>
-
-
-
 
     <script>$("button").on("click", function () {
             var randGif = $(this).attr("randomGif");
@@ -69,9 +68,17 @@
                 gifDiv.prepend(p);
                 gifDiv.prepend(gifImage);
                 $("#gifs-appear-here").prepend(gifDiv);
-
             });
-        });</script>
+        });
+        $("#searchButton").on("click", function (event) {
+            event.preventDefault();
+            console.log("search button has been clicked");
+            searchTerm = $("#searchTerm").val();
+            console.log(searchTerm);
+            topics.push(searchTerm);
+            $("#buttonDrop").append('<button class="topicButtons" data-value= "' + searchTerm + '">' + searchTerm + '</button>');
+            console.log(topics);
+    </script>
 </body>
 
 </html>
